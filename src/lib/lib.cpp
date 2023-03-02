@@ -5,7 +5,7 @@ graph::Graph::Graph(const int& nodes, const std::vector<Input>& arcs) : nodes(no
     for (auto e : arcs) {
         adj[e.tail].push_back(Arc(e.head, e.weight));
     }
-    this->adj = adj;
+    this->adjacentList = adj;
 }
 
 void graph::Path::push(const int& v) {

@@ -42,7 +42,7 @@ void outputAllPaths(Path& P, const int& u, const Graph& graph) {
     if (u == t) {
         P.print();
     } else {
-        for (auto v: graph.adj[u]) {
+        for (auto v: graph.adjacentList[u]) {
             if (!P.contains(v.head)) {
                 outputAllPaths(P, v.head, graph);
             }

@@ -25,7 +25,7 @@ namespace graph {
     class Graph {
     public:
         int nodes;
-        std::vector<std::vector<Arc>> adj;
+        std::vector<std::vector<Arc>> adjacentList;
 
         Graph(const int& nodes, const std::vector<Input>& arcs);
     };
