@@ -4,28 +4,24 @@
 using namespace std;
 using namespace graph;
 
+void outputAllPaths(Path &P, const int& u, const Graph &graph);
+
+int s = 0;
+int t = 4;
+
 int main() {
-    // This is the directed graph we're going to use.
-            // The node numbers correspond to the different states,
-            // and the edge weights symbolize the cost of moving
-            // from one node to another.
-            // Note that the edges are one-way.
-            //
-            //                  7
-            //          +-----------------+
-            //          |                 |
-            //          v   1        2    |  2
-            //          0 -----> 1 -----> 3 ---> 4
-            //          |        ^        ^      ^
-            //          |        | 1      |      |
-            //          |        |        | 3    | 1
-            //          +------> 2 -------+      |
-            //           10      |               |
-            //                   +---------------+
-            //
-            // The graph is represented as an adjacency list where each index,
-            // corresponding to a node value, has a list of outgoing edges.
-            // Chosen for its efficiency.
+    //                  7
+    //          +-----------------+
+    //          |                 |
+    //          v   1        2    |  2
+    //          0 -----> 1 -----> 3 ---> 4
+    //          |        ^        ^      ^
+    //          |        | 1      |      |
+    //          |        |        | 3    | 1
+    //          +------> 2 -------+      |
+    //           10      |               |
+    //                   +---------------+
+    //
     vector<Input> input = {
         Input(0, 2, 10),
         Input(0, 1, 1),
@@ -37,11 +33,20 @@ int main() {
         Input(3, 4, 2),
     };
     auto graph = Graph(5, input);
-    for (int i = 0; i < 5; ++i) {
-        cout << i << "-> ";
-        for (auto e : graph.adj[i]) {
-            cout << e.head << '(' << e.weight << "),";
+    auto path = Path();
+    outputAllPaths(path, s, graph);
+}
+
+void outputAllPaths(Path& P, const int& u, const Graph& graph) {
+    P.push(u);
+    if (u == t) {
+        P.print();
+    } else {
+        for (auto v: graph.adj[u]) {
+            if (!P.contains(v.head)) {
+                outputAllPaths(P, v.head, graph);
+            }
         }
-        cout << endl;
     }
+    P.pop();
 }
