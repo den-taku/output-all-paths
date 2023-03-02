@@ -36,11 +36,11 @@ int Path::sumWeight(const Graph &graph) {
         return 0;
     }
     int sum = 0;
-    int s = this->path[0];
+    int u = this->path[0];
     for (int i = 1; i < this->path.size(); ++i) {
-        int t = this->path[i];
-        sum += graph.adjacentList[s].at(t);
-        s = t;
+        int v = this->path[i];
+        sum += graph.adjacentList[u].at(v);
+        u = v;
     }
     return sum;
 }
