@@ -1,4 +1,5 @@
 #include "../lib/lib.hpp"
+#include "../lib/sample.hpp"
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -41,7 +42,11 @@ int main() {
     //     cout << endl;
     // }
     auto path = Path();
+    cout << "Example1" << endl;
     outputAllPaths(path, s, graph);
+
+    cout << "Example2" << endl;
+    outputAllPaths(path, s, sample());
 }
 
 void outputAllPaths(Path& P, const int& u, const Graph& graph) {

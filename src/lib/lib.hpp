@@ -16,12 +16,6 @@ namespace graph {
             : tail(tail), head(head), weight(weight) {}
     } Arc;
 
-    // typedef struct Arc {
-    //     int head;
-    //     int weight;
-    //     Arc(const int& head, const int& weight): head(head), weight(weight) {}
-    // } Arc;
-
     // 隣接リスト
     class Graph {
     public:
