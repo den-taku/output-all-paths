@@ -33,13 +33,13 @@ int main() {
         Arc(3, 4, 2),
     };
     auto graph = Graph(5, input);
-    for (int i = 0; i < 5; ++i) {
-        cout << i << " -> ";
-        for (auto e: graph.adjacentList[i]) {
-            cout << e.first << "(" << e.second << "), ";
-        }
-        cout << endl;
-    }
+    // for (int i = 0; i < 5; ++i) {
+    //     cout << i << " -> ";
+    //     for (auto e: graph.adjacentList[i]) {
+    //         cout << e.first << "(" << e.second << "), ";
+    //     }
+    //     cout << endl;
+    // }
     auto path = Path();
     outputAllPaths(path, s, graph);
 }
