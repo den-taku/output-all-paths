@@ -1,14 +1,17 @@
 #include "lib.hpp"
 
-graph::Graph::Graph(const int& nodes, const std::vector<Input>& arcs) : nodes(nodes) {
-    std::vector<std::vector<Arc>> adj(nodes, std::vector<Arc>(0, Arc(0, 0)));
+using namespace graph;
+using namespace std;
+
+Graph::Graph(const int& nodes, const std::vector<Arc>& arcs) : nodes(nodes) {
+    vector<unordered_map<int, int>> adj(nodes, unordered_map<int, int>());
     for (auto e : arcs) {
-        adj[e.tail].push_back(Arc(e.head, e.weight));
+        adj[e.tail].emplace(e.head, e.weight);
     }
     this->adjacentList = adj;
 }
 
-void graph::Path::push(const int& v) {
+void Path::push(const int& v) {
     this->path.push_back(v);
     this->set.insert(v);
 }
@@ -20,9 +23,24 @@ int graph::Path::pop() {
     return ret;
 }
 
-void graph::Path::print() const {
+void Path::print() const {
     for (auto e: this->path) {
-        std::cout << e << ' ';
+        cout << e << ' ';
     }
-    std::cout << std::endl;
+    cout << std::endl;
+}
+
+
+int Path::sumWeight(const Graph &graph) {
+    if (this->path.size() == 0) {
+        return 0;
+    }
+    int sum = 0;
+    int s = this->path[0];
+    for (int i = 1; i < this->path.size(); ++i) {
+        int t = this->path[i];
+        sum += graph.adjacentList[s].at(t);
+        s = t;
+    }
+    return sum;
 }

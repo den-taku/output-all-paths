@@ -4,30 +4,31 @@
 #include <vector>
 #include <iostream>
 #include <unordered_set>
+#include <unordered_map>
 
 namespace graph {
     // (tail, head), d(tail, head) = weight
-    typedef struct Input {
+    typedef struct Arc {
         int tail;
         int head;
         int weight;
-        Input(const int& tail, const int& head, const int& weight)
+        Arc(const int& tail, const int& head, const int& weight)
             : tail(tail), head(head), weight(weight) {}
-    } Input;
-
-    typedef struct Arc {
-        int head;
-        int weight;
-        Arc(const int& head, const int& weight): head(head), weight(weight) {}
     } Arc;
+
+    // typedef struct Arc {
+    //     int head;
+    //     int weight;
+    //     Arc(const int& head, const int& weight): head(head), weight(weight) {}
+    // } Arc;
 
     // 隣接リスト
     class Graph {
     public:
         int nodes;
-        std::vector<std::vector<Arc>> adjacentList;
+        std::vector<std::unordered_map<int, int>> adjacentList;
 
-        Graph(const int& nodes, const std::vector<Input>& arcs);
+        Graph(const int& nodes, const std::vector<Arc>& arcs);
     };
 
     // 有向路
@@ -39,6 +40,7 @@ namespace graph {
             int pop();
             void print() const;
             bool contains(const int& v) const {return this->set.count(v);};
+            int sumWeight(const Graph &graph);
 
         private:
             std::unordered_set<int> set;
